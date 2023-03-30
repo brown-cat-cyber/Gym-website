@@ -2,6 +2,9 @@ import Navbar from "./scenes/navbar";
 import { useEffect, useState } from "react";
 import { SelectedPage } from "./shared/types";
 import Home from "./scenes/home";
+import Benefits from "./scenes/benifits";
+import { SelectedPageProvider } from "./contexts/SelectedPageContext";
+import OurClasses from "./scenes/ourClasses";
 
 function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
@@ -22,14 +25,18 @@ function App() {
   }, []);
 
   return (
-    <div className="app bg-gray-20">
-      <Navbar
-        isTopOfPage={isTopOfPage}
-        selectedPage={selectedPage}
-        setSelectedPage={setSelectedPage}
-      />
-      <Home setSelectedPage={setSelectedPage} />
-    </div>
+    <SelectedPageProvider>
+      <div className="app bg-gray-20">
+        <Navbar
+          isTopOfPage={isTopOfPage}
+          selectedPage={selectedPage}
+          setSelectedPage={setSelectedPage}
+        />
+        <Home setSelectedPage={setSelectedPage} />
+        <Benefits setSelectedPage={setSelectedPage} />
+        <OurClasses setSelectedPage={setSelectedPage} />
+      </div>
+    </SelectedPageProvider>
   );
 }
 
